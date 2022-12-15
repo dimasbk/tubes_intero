@@ -4,65 +4,60 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PortofolioJualModel;
+use App\Models\PortofolioBeliModel;
 use App\Models\JenisSahamModel;
 use App\Models\SahamModel;
 use Illuminate\Support\Facades\Auth;
 
-class PortofolioJualAPIController extends Controller
+class PortofolioBeliAPIController extends Controller
 {
     public function __construct(){
-        $this->PortofolioJualModel = new PortofolioJualModel;
-        $this->JenisSahamModel = new JenisSahamModel;
-        $this->SahamModel = new SahamModel;
-        $this->middleware('auth');
+        $this->PortofolioBeliModel = new PortofolioBeliModel;
+        //$this->JenisSahamModel = new JenisSahamModel;
+        //$this->SahamModel = new SahamModel;
+        //$this->middleware('auth');
     }
 
-    public function index(){
+    public function allData(){
 
-        $dataporto = [
-            'portojual'=>$this->PortofolioJualModel->allData(),
-        ];
+        $dataporto = PortofolioBeliModel::all();
         return response()->json(['messsage'=>'Berhasil', 'data'=>$dataporto ]);
 
     }
 
     public function getdata($user_id){
-        $dataporto = PortofolioJualModel::where('user_id', $user_id)->join('tb_saham', 'tb_portofolio_jual.id_saham', '=', 'tb_saham.id_saham')->get();
+        $dataporto = PortofolioBeliModel::where('user_id', $user_id)->join('tb_saham', 'tb_portofolio_beli.id_saham', '=', 'tb_saham.id_saham')->get();
         $emiten = SahamModel::all();
         $jenis_saham = JenisSahamModel::all();
 
         $data = compact(['dataporto'],['emiten'],['jenis_saham']);
         //dd($data);
-        return response()->json(['messsage'=>'Berhasil', 'data'=>$dataporto ]);
+        return response()->json(['messsage'=>'Berhasil', 'data'=>$data]);
     }
+
     public function insertData(Request $request){
 
         $id = Auth::id();        
-
-        $insert = PortofolioJualModel::create([
+        $insert = PortofolioBeliModel::create([
             'id_saham' => $request->id_saham,
             'user_id' => $id,
             'jenis_saham' => $request->id_jenis_saham,
             'volume' => $request->volume,
-            'tanggal_jual' => $request->tanggal_jual,
-            'harga_jual' => $request->harga_jual,
-            'fee_jual_persen' => $request->fee_jual_persen,
+            'tanggal_jual' => $request->tanggal_beli,
+            'harga_jual' => $request->harga_beli,
+            'fee_jual_persen' => $request->fee_beli_persen,
         ]);
 
-        //$insert->save();
         //dd($data);
         //dd($request);
-        //$this->PortofolioJualModel->insertData($data);
         if($insert){
-            $insert->save();
-            return response()->json(['messsage'=>'Data Berhasil Masuk', 'data'=>$insert ]);
+            //$insert->save();
+            return response()->json(['messsage'=>'Berhasil', 'data'=>$insert ]);
         }
     }
-
     public function editData(Request $request){
 
-        $dataporto = PortofolioJualModel::where('id_portofolio_jual', $request->id_portofolio_jual)->firstOrFail();
+        $dataporto = PortofolioBeliModel::where('id_portofolio_beli', $request->id_portofolio_beli)->firstOrFail();
         $id = Auth::id();
         //dd($dataporto);
         
@@ -71,9 +66,9 @@ class PortofolioJualAPIController extends Controller
         $dataporto->user_id = $id;
         $dataporto->jenis_saham = $request->id_jenis_saham;
         $dataporto->volume = $request->volume;
-        $dataporto->tanggal_jual = $request->tanggal_jual;
-        $dataporto->harga_jual = $request->harga_jual;
-        $dataporto->fee_jual_persen = $request->fee_jual_persen;
+        $dataporto->tanggal_beli = $request->tanggal_beli;
+        $dataporto->harga_beli = $request->harga_beli;
+        $dataporto->fee_beli_persen = $request->fee_beli_persen;
         $dataporto->save();
         
 
@@ -81,7 +76,7 @@ class PortofolioJualAPIController extends Controller
     }
 
     public function deleteData($id_portofolio_jual){
-        $dataporto = PortofolioJualModel::where('id_portofolio_jual', $id_portofolio_jual)->firstOrFail();
+        $dataporto = PortofolioBeliModel::where('id_portofolio_beli', $id_portofolio_beli)->firstOrFail();
         $dataporto->delete();
         $id = Auth::id();
         return response()->json(['messsage'=>'Data Berhasil di Delete' ]);
