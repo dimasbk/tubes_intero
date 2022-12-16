@@ -20,16 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/report/{user_id}/{tahun}', [ReportAPIController::class, 'getReport']);
+Route::get('/portofolio/report', [ReportAPIController::class, 'getReport']);
 
-Route::get('/portofoliobeli', [PortofolioBeliAPIController::class, 'allData']);
-Route::get('/portofoliobeli/{user_id}', [PortofolioBeliAPIController::class, 'getData']);
-Route::post('/portofoliobeli/addbeli', [PortofolioBeliAPIController::class, 'insertData']);
-Route::post('/portofoliobeli/editbeli', [PortofolioBeliAPIController::class, 'editData']);
-Route::get('/portofoliobeli/delete/{id_portofolio_beli}', [PortofolioBeliAPIController::class, 'deleteData']);
-
-Route::get('/portofoliojual', [PortofolioJualAPIController::class, 'index']);
-Route::get('/portofoliojual/{user_id}', [PortofolioJualAPIController::class, 'getdata']);
-Route::post('/portofoliojual/addjual', [PortofolioJualAPIController::class, 'insertData']);
-Route::post('/portofoliojual/editjual', [PortofolioJualAPIController::class, 'editData']);
-Route::get('/portofoliojual/delete/{id_portofolio_jual}', [PortofolioJualAPIController::class, 'deleteData']);
+Route::get('/portofolio/jual', [PortofolioJualAPIController::class, 'getdata']);
+Route::post('/portofolio/jual/addjual', [PortofolioJualAPIController::class, 'insertData']);
+Route::post('/portofolio/jual/editjual', [PortofolioJualAPIController::class, 'editData']);
+Route::get('/portofolio/jual/delete', [PortofolioJualAPIController::class, 'deleteData']);
