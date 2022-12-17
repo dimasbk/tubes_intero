@@ -26,3 +26,10 @@ Route::get('/portofolio/jual', [PortofolioJualAPIController::class, 'getdata']);
 Route::post('/portofolio/jual/addjual', [PortofolioJualAPIController::class, 'insertData']);
 Route::post('/portofolio/jual/editjual', [PortofolioJualAPIController::class, 'editData']);
 Route::get('/portofolio/jual/delete', [PortofolioJualAPIController::class, 'deleteData']);
+
+
+//Api 1 
+Route::get('/fundamental/input','App\Http\Controllers\InputFundamentalApiController@read_all_data');
+Route::post('/fundamental/input/addinput', 'App\Http\Controllers\InputFundamentalApiController@insert_data');
+//Api 2
+Route::post('/fundamental/output/', 'App\Http\Controllers\OutputFundamentalApiController@insert_data_output');
