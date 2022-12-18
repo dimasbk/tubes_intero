@@ -41,6 +41,7 @@ class OutputFundamentalApiController extends Controller
             $data_input = $id_input_validation;
             
             //Pembuatan variable
+            $userid= $data_input->user_id;
             $id_saham=$data_input->id_saham; 
             $aset = $data_input->aset; 
             $simpanan = $data_input->simpanan; 
@@ -120,6 +121,7 @@ class OutputFundamentalApiController extends Controller
                 'peg'=> $peg,
                 'harga_saham_sum_dividen'=> $harga_saham_sum_dividen,
                 'tahun'=> $tahun,
+                'user_id'=> $userid,
             ]);
             $insert->save();
             return response()->json([

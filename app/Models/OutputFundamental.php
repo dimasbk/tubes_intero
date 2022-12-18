@@ -31,6 +31,7 @@ class OutputFundamental extends Model
         'peg',
         'market_cap_cfo_ratio',
         'harga_saham_sum_dividen',
-        'tahun'
+        'tahun',
+        'user_id'
     ];
 }
