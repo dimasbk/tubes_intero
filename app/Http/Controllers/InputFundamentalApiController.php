@@ -21,7 +21,7 @@ class InputFundamentalApiController extends Controller
                 'success' => false,
                 'message' => 'Silahkan Isi Bidang Yang Kosong',
                 'error'    => $validate->errors()
-            ],401);
+            ],422);
 
         }else{
             $data = InputFundamental::where('user_id', '=', $request->user_id)->first();
@@ -68,7 +68,7 @@ class InputFundamentalApiController extends Controller
                 'success' => false,
                 'message' => 'Silahkan Isi Bidang Yang Kosong',
                 'error'    => $validate->errors()
-            ],401);
+            ],422);
         }else{
             //Semua value ada
 

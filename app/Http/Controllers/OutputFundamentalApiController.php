@@ -23,7 +23,7 @@ class OutputFundamentalApiController extends Controller
                 'success' => false,
                 'message' => 'Silahkan Isi Bidang Yang Kosong',
                 'error'    => $validate->errors()
-            ],401);
+            ],422);
 
         }else{
             //Semua value ada
