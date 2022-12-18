@@ -68,7 +68,7 @@ class OutputFundamentalApiController extends Controller
             // eps tahun lalu tidak ditemukan
                 return response()->json([
                     'success' => false,
-                    'message' => 'ESP tahun sebelumnya tidak ditemukan',
+                    'message' => 'EPS tahun sebelumnya tidak ditemukan',
                 ],404);
             }
 
